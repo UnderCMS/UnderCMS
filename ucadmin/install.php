@@ -2,7 +2,7 @@
 //The installation file of UnderCMS
 // Check if already installed
 @$check = include "../uc-config.php";
-if($check){
+if($check && $_GET['step']!=3){
     //Installed
     ?>
     <html>
