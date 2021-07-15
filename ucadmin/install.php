@@ -124,8 +124,7 @@ if($check && $_GET['step']!=3){
                     if(isset($_POST['submit'])){
                         if(!empty($_POST['sitename']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['dbprefix'])){
                             $configfile = fopen("../uc-config.php", "w");
-                            $configtext = "
-<?php
+                            $configtext = "<?php
 //Main configuration file of UnderCMS
 // Define DB details
 define('HOST', '". $_GET['dburl'] ."');
@@ -160,6 +159,9 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                                 ADD UNIQUE KEY `valuename` (`valuename`);
                             COMMIT;");
                             $query->execute();
+                            require "../ucinclude/user/createuser.php";
+                            sleep(5);
+                            createUser($_POST['username'], $_POST['password'], $_POST['email']);
                             header("Location: /ucadmin/install.php?step=3");
                         }else{
                             echo "<div class='alert alert-danger' role='alert'>
