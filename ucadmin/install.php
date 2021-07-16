@@ -2,7 +2,8 @@
 //The installation file of UnderCMS
 // Check if already installed
 @$check = include "../uc-config.php";
-if($check && $_GET['step']!=3){
+@$check2 = include "../setup-in-progress.php";
+if($check && $_GET['step']!=3 && !$check2){
     //Installed
     ?>
     <html>
@@ -59,6 +60,12 @@ if($check && $_GET['step']!=3){
                             </div>
                             <input type="text" class="form-control" placeholder="Database name" name="databasename" aria-describedby="basic-addon1" value="undercms">
                         </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Database Prefix</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Database prefix" name="dbprefix" aria-describedby="basic-addon1" value="uc_">
+                        </div>
                         <input type="submit" name="submit" class="btn btn-outline-success" value="Next">
                     </form>
                     <?php
@@ -73,7 +80,58 @@ if($check && $_GET['step']!=3){
                         </div>";
                                 exit();
                             }
-                            header("Location: /ucadmin/install.php?step=2&dburl=".$_POST['databaseurl']. "&dbname=". $_POST['databasename'] ."&user=".$_POST['user']."&password=".$_POST['password']);
+                            $configfile = fopen("../uc-config.php", "w");
+                            $configtext = "<?php
+//Main configuration file of UnderCMS
+// Define DB details
+define('HOST', '". $_POST['databaseurl'] ."');
+define('DB_NAME', '". $_POST['databasename'] ."');
+define('USER', '". $_POST['user'] ."');
+define('PASS', '". $_POST['password'] ."');
+define('DB_PREFIX', '". $_POST['dbprefix'] ."');
+
+?>";    
+                            fwrite($configfile, $configtext);
+                            fclose($configfile);
+                            require "../uc-config.php";
+                            require "../ucinclude/db/con.php";
+                            $query = $db->prepare("CREATE TABLE `".$_POST['dbprefix']."users` (
+                            `id` int NOT NULL,
+                                `username` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `password` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `email` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `datecreated` int NOT NULL
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+                            ALTER TABLE `".$_POST['dbprefix']."users`
+                                ADD PRIMARY KEY (`id`),
+                                ADD UNIQUE KEY `id` (`id`,`username`),
+                                ADD UNIQUE KEY `email` (`email`);
+                            ALTER TABLE `".$_POST['dbprefix']."users`
+                                MODIFY `id` int NOT NULL AUTO_INCREMENT;
+                            CREATE TABLE `".$_POST['dbprefix']."options` (
+                                `valuename` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `valuecontent` varchar(255) COLLATE utf8_bin NOT NULL
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+                            ALTER TABLE `".$_POST['dbprefix']."options`
+                                ADD UNIQUE KEY `valuename` (`valuename`);
+                            CREATE TABLE `".$_POST['dbprefix']."articles` (
+                                `id` int NOT NULL,
+                                `author_id` int NOT NULL,
+                                `title` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `content` text COLLATE utf8_bin NOT NULL,
+                                `article_url` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `datecreated` int NOT NULL
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
+                            ALTER TABLE `".$_POST['dbprefix']."articles`
+                                ADD PRIMARY KEY (`id`),
+                                ADD UNIQUE KEY `article_url` (`article_url`),
+                                ADD UNIQUE KEY `title` (`title`);
+                            ALTER TABLE `".$_POST['dbprefix']."articles`
+                                MODIFY `id` int NOT NULL AUTO_INCREMENT;");
+                            $query->execute();
+                            $setupinprogress = fopen("../setup-in-progress.php", "w");
+                            fclose($setupinprogress);
+                            header("Location: /ucadmin/install.php?step=2");
                         }else{
                             echo "<div class='alert alert-danger' role='alert'>
                             Some fields are incomplete!
@@ -111,57 +169,23 @@ if($check && $_GET['step']!=3){
                             </div>
                             <input type="email" class="form-control" placeholder="E-mail" name="email" aria-describedby="basic-addon1">
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Database Prefix</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Database prefix" name="dbprefix" aria-describedby="basic-addon1" value="uc_">
-                        </div>
                         <p>And then, just click install and wait for the process to complete!</p>
                         <input type="submit" name="submit" class="btn btn-outline-success" value="Install">
                     </form>
                     <?php
                     if(isset($_POST['submit'])){
-                        if(!empty($_POST['sitename']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['dbprefix'])){
-                            $configfile = fopen("../uc-config.php", "w");
-                            $configtext = "<?php
-//Main configuration file of UnderCMS
-// Define DB details
-define('HOST', '". $_GET['dburl'] ."');
-define('DB_NAME', '". $_GET['dbname'] ."');
-define('USER', '". $_GET['user'] ."');
-define('PASS', '". $_GET['password'] ."');
-define('DB_PREFIX', '". $_POST['dbprefix'] ."');
-
-?>
-                            ";
-                            fwrite($configfile, $configtext);
-                            fclose($configfile);
+                        if(!empty($_POST['sitename']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email'])){
+                            require "../uc-config.php";
                             require "../ucinclude/db/con.php";
-                            $query = $db->prepare("CREATE TABLE `".$_POST['dbprefix']."users` (
-                            `id` int NOT NULL,
-                                `username` varchar(255) COLLATE utf8_bin NOT NULL,
-                                `password` varchar(255) COLLATE utf8_bin NOT NULL,
-                                `email` varchar(255) COLLATE utf8_bin NOT NULL,
-                                `datecreated` int NOT NULL
-                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
-                            ALTER TABLE `".$_POST['dbprefix']."users`
-                                ADD PRIMARY KEY (`id`),
-                                ADD UNIQUE KEY `id` (`id`,`username`),
-                                ADD UNIQUE KEY `email` (`email`);
-                            ALTER TABLE `".$_POST['dbprefix']."users`
-                                MODIFY `id` int NOT NULL AUTO_INCREMENT;
-                            CREATE TABLE `".$_POST['dbprefix']."options` (
-                                `valuename` varchar(255) COLLATE utf8_bin NOT NULL,
-                                `valuecontent` varchar(255) COLLATE utf8_bin NOT NULL
-                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;
-                            ALTER TABLE `".$_POST['dbprefix']."options`
-                                ADD UNIQUE KEY `valuename` (`valuename`);
-                            COMMIT;");
+                            $query = $db->prepare('INSERT INTO `'.DB_PREFIX.'options`(`valuename`, `valuecontent`) VALUES ("site-title", "'.$_POST['sitename'].'")');
+                            $query->execute();
+                            $query = $db->prepare('INSERT INTO `'.DB_PREFIX.'options`(`valuename`, `valuecontent`) VALUES ("site-description", "A website made on UnderCMS!")');
+                            $query->execute();
+                            $query = $db->prepare('INSERT INTO `'.DB_PREFIX.'options`(`valuename`, `valuecontent`) VALUES ("current-theme", "basictheme")');
                             $query->execute();
                             require "../ucinclude/user/createuser.php";
-                            sleep(5);
-                            createUser($_POST['username'], $_POST['password'], $_POST['email']);
+                            createUser($_POST['username'], $_POST['password'], $_POST['email'], $db);
+                            unlink("../setup-in-progress.php");
                             header("Location: /ucadmin/install.php?step=3");
                         }else{
                             echo "<div class='alert alert-danger' role='alert'>
