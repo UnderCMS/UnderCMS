@@ -183,6 +183,9 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                             $query->execute();
                             $query = $db->prepare('INSERT INTO `'.DB_PREFIX.'options`(`valuename`, `valuecontent`) VALUES ("current-theme", "basictheme")');
                             $query->execute();
+                            $query = $db->prepare("INSERT INTO `".DB_PREFIX."articles` (`id`, `author_id`, `title`, `content`, `article_url`, `datecreated`) VALUES
+                            (1, 1, 'My Article', 'This is a test article. Do anything you want with this!', 'my-article', ".time().");");
+                            $query->execute();
                             require "../ucinclude/user/createuser.php";
                             createUser($_POST['username'], $_POST['password'], $_POST['email'], $db);
                             unlink("../setup-in-progress.php");
