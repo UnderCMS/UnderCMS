@@ -6,9 +6,9 @@ $user = getUserDataByToken($_SESSION['token'], $db);
     <section class="row mb-5 pb-md-4 align-items-center">
         <div class="col-md-5">
             <div class="masthead-followup-icon d-inline-block mb-2">        
-                <h2 class="display-5 fw-normal">Welcome, <?php echo $user['title'] ?></h3>
+                <h2 class="display-5 fw-normal">Welcome, <?php echo $user['username'] ?>,</h3>
                 <p class="lead fw-normal">Today is the <?php echo date("l jS, Y") ?></p>
-                <small>UnderCMS 0.1.5</small>
+                <small>UnderCMS 0.1.5.1</small>
             </div>
         </div>
     </section>
