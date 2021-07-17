@@ -8,7 +8,7 @@ $user = getUserDataByToken($_SESSION['token'], $db);
             <div class="masthead-followup-icon d-inline-block mb-2">        
                 <h2 class="display-5 fw-normal">Welcome, <?php echo $user['username'] ?>,</h3>
                 <p class="lead fw-normal">Today is the <?php echo date("l jS, Y") ?></p>
-                <small>UnderCMS 0.1.5.1</small>
+                <small>UnderCMS <?php echo $UC_VERSION ?></small>
             </div>
         </div>
     </section>

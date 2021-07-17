@@ -27,12 +27,17 @@ require "uccontent/themes/".$result['valuecontent']."/manifest.php";
 //Initialize routes
 $router = new AltoRouter;
 
+//Routes
+
 $router->map('GET', '/', 'uccontent/themes/'.$result['valuecontent'].'/'.$THEME_MAIN_FILE);
 $router->map('GET|POST', '/articles/[*:articleurl]', 'uccontent/themes/'.$result['valuecontent'].'/'.$THEME_ARTICLE_FILE);
 $router->map('GET|POST', '/uc-login', 'uc-login.php');
 $router->map('GET', '/uc-admin', 'ucadmin/index.php');
 $router->map('GET|POST', '/uc-admin/themes', 'ucadmin/themes.php');
 $router->map('GET|POST', '/uc-admin/settings', 'ucadmin/settings.php');
+$router->map('GET', '/uc-admin/articles', 'ucadmin/articles.php');
+$router->map('GET|POST', '/uc-admin/articles/new', 'ucadmin/new-article.php');
+$router->map('GET|POST', '/uc-admin/articles/delete/[*:articleid]', 'ucadmin/delete-article.php');
 $router->map('GET', '/logout', 'ucadmin/logout.php');
 
 

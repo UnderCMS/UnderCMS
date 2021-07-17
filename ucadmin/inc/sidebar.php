@@ -6,23 +6,28 @@
     <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
       <li class="nav-item">
         <a href="/uc-admin" class="nav-link active py-3 border-bottom" aria-current="page" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-          <img src="../ucadmin/img/home.png" width="24" height="24" >
+          <img src="/ucadmin/img/home.png" width="24" height="24" >
         </a>
       </li>
       <li>
         <a href="/uc-admin/themes" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Themes">
-          <img src="../ucadmin/img/paintbrush.png" width="24" height="24" >
+          <img src="/ucadmin/img/paintbrush.png" width="24" height="24" >
         </a>
       </li>
       <li>
         <a href="/uc-admin/settings" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Settings">
-          <img src="../ucadmin/img/settings.png" width="24" height="24" >
+          <img src="/ucadmin/img/settings.png" width="24" height="24" >
+        </a>
+      </li>
+      <li>
+        <a href="/uc-admin/articles" class="nav-link py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Articles">
+          <img src="/ucadmin/img/article.png" width="24" height="24" >
         </a>
       </li>
     </ul>
     <div class="dropdown border-top">
       <a href="#" class="d-flex align-items-center justify-content-center p-3 link-dark text-decoration-none dropdown-toggle" id="dropdownUser3" data-bs-toggle="dropdown" aria-expanded="false" >
-        <img src="../ucadmin/img/user.png" alt="User" width="24" height="24" class="rounded-circle">
+        <img src="/ucadmin/img/user.png" alt="User" width="24" height="24" class="rounded-circle">
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
         <li><a class="dropdown-item" href="/uc-admin/settings">Settings</a></li>
@@ -31,4 +36,4 @@
       </ul>
     </div>
   </div>
-  <script src="../ucadmin/js/sidebar.js"></script>
+  <script src="/ucadmin/js/sidebar.js"></script>

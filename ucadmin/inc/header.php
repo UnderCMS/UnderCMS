@@ -1,13 +1,14 @@
 <?php
 require "./ucinclude/user/getuser.php";
+require "./ucinclude/version.php";
 if(!isset($_SESSION['token'])){
     header("Location: /");
 }
 ?>
 <head>
-    <link rel="stylesheet" href="../ucadmin/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../ucadmin/css/sidebar.css">
-    <script src="../ucadmin/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/ucadmin/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ucadmin/css/sidebar.css">
+    <script src="/ucadmin/js/bootstrap.bundle.min.js"></script>
     <title>UnderCMS Admin</title>
 </head>
 <body>
