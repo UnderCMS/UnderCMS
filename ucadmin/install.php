@@ -127,7 +127,11 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                                 ADD UNIQUE KEY `article_url` (`article_url`),
                                 ADD UNIQUE KEY `title` (`title`);
                             ALTER TABLE `".$_POST['dbprefix']."articles`
-                                MODIFY `id` int NOT NULL AUTO_INCREMENT;");
+                                MODIFY `id` int NOT NULL AUTO_INCREMENT;
+                            CREATE TABLE `".$_POST['dbprefix']."tokens` (
+                                `forid` int NOT NULL,
+                                `token` varchar(255) COLLATE utf8_bin NOT NULL
+                            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_bin;");
                             $query->execute();
                             $setupinprogress = fopen("../setup-in-progress.php", "w");
                             fclose($setupinprogress);

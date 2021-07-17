@@ -29,6 +29,12 @@ $router = new AltoRouter;
 
 $router->map('GET', '/', 'uccontent/themes/'.$result['valuecontent'].'/'.$THEME_MAIN_FILE);
 $router->map('GET|POST', '/articles/[*:articleurl]', 'uccontent/themes/'.$result['valuecontent'].'/'.$THEME_ARTICLE_FILE);
+$router->map('GET|POST', '/uc-login', 'uc-login.php');
+$router->map('GET', '/uc-admin', 'ucadmin/index.php');
+$router->map('GET|POST', '/uc-admin/themes', 'ucadmin/themes.php');
+$router->map('GET|POST', '/uc-admin/settings', 'ucadmin/settings.php');
+$router->map('GET', '/logout', 'ucadmin/logout.php');
+
 
 // Match the current request
 $match = $router->match(urldecode($_SERVER['REQUEST_URI']));

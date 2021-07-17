@@ -24,6 +24,15 @@ $result2 = $query2->fetch();
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                <?php if(isset($_SESSION['token'])){ ?>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/uc-admin">Dashboard</a>
+                    </li>
+                <?php }else{ ?>
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/uc-login">Login</a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
     </nav>
