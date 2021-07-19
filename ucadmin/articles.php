@@ -22,14 +22,14 @@ $articles = $article->fetchAll($db);
                     </thead>
                     <tbody>
                         <?php foreach($articles as $article){ 
-                                $user = getUserDataByID($article['author_id'], $db);
+                                $user = $userclass->getUserDataByID($article['author_id'], $db);
                                 if(strlen($article['content']) > 100){
                                     $article['content'] = substr($article['content'],0,100) . "...";
                                 }?>
                                 <tr>
                                 <td scope="row"><?php echo $article['title'] ?></td>
                                 <td><?php echo $article['content'] ?></td>
-                                <td><?php echo $user['username'] ?></td>
+                                <td><?php if(is_null($user['pseudonym']) || $user['is_pseudonym']==0){echo $user['username'];}else{echo $user['pseudonym'];} ?></td>
                                 <td><a href="/uc-admin/articles/delete/<?php echo $article['id'] ?>" name="submit" class="btn btn-outline-danger">Delete</a></td>
                                 </tr>
                         <?php } ?>

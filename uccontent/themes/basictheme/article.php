@@ -7,8 +7,9 @@ if(!$article){
     exit();
 }
 require "inc/header.php";
-require "./ucinclude/user/getuser.php";
-$author = getUserDataByID($article['author_id'], $db);
+require "./ucinclude/user.php";
+$userclass = new User;
+$author = $userclass->getUserDataByID($article['author_id'], $db);
 ?>
 <body>
         <div class="container masthead-followup px-4 px-md-3">
@@ -17,7 +18,7 @@ $author = getUserDataByID($article['author_id'], $db);
                     <div class="masthead-followup-icon d-inline-block mb-2">        
                         <h2 class="display-5 fw-normal"><?php echo $article['title'] ?></h3>
                         <p class="lead fw-normal"><?php echo $article['content'] ?></p>
-                        <small>By <?php echo $author['username'] ?>, posted <?php echo date("l jS", $article['datecreated']) ?></small>
+                        <small>By <?php if(is_null($author['pseudonym']) || $author['is_pseudonym']==0){echo $author['username'];}else{echo $author['pseudonym'];} ?>, posted <?php echo date("l jS", $article['datecreated']) ?></small>
                     </div>
                 </div>
             </section>

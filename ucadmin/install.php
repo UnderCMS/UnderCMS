@@ -98,6 +98,8 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                             $query = $db->prepare("CREATE TABLE `".$_POST['dbprefix']."users` (
                             `id` int NOT NULL,
                                 `username` varchar(255) COLLATE utf8_bin NOT NULL,
+                                `is_pseudonym` tinyint(1) NOT NULL,
+                                `pseudonym` varchar(255) COLLATE utf8_bin NOT NULL,
                                 `password` varchar(255) COLLATE utf8_bin NOT NULL,
                                 `email` varchar(255) COLLATE utf8_bin NOT NULL,
                                 `datecreated` int NOT NULL
@@ -190,8 +192,9 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                             $query = $db->prepare("INSERT INTO `".DB_PREFIX."articles` (`id`, `author_id`, `title`, `content`, `article_url`, `datecreated`) VALUES
                             (1, 1, 'My Article', 'This is a test article. Do anything you want with this!', 'my-article', ".time().");");
                             $query->execute();
-                            require "../ucinclude/user/createuser.php";
-                            createUser($_POST['username'], $_POST['password'], $_POST['email'], $db);
+                            require "../ucinclude/user.php";
+                            $userclass = new User;
+                            $userclass->createUser($_POST['username'], $_POST['password'], $_POST['email'], $db);
                             unlink("../setup-in-progress.php");
                             header("Location: /ucadmin/install.php?step=3");
                         }else{

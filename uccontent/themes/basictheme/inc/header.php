@@ -9,8 +9,8 @@ $result2 = $query2->fetch();
 ?>
 <html>
     <head>
-        <link rel="stylesheet" href="../uccontent/themes/basictheme/assets/bootstrap.min.css">
-        <script src="../uccontent/themes/basictheme/assets/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="/uccontent/themes/basictheme/assets/bootstrap.min.css">
+        <script src="/uccontent/themes/basictheme/assets/bootstrap.bundle.min.js"></script>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -1,6 +1,6 @@
 <?php
 require "inc/header.php";
-$user = getUserDataByToken($_SESSION['token'], $db);
+$user = $userclass->getUserDataByToken($_SESSION['token'], $db);
 ?>
 <div class="container masthead-followup px-4 px-md-3">
     <section class="row mb-5 pb-md-4 align-items-center">

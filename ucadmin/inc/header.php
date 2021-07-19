@@ -1,6 +1,7 @@
 <?php
-require "./ucinclude/user/getuser.php";
 require "./ucinclude/version.php";
+require "./ucinclude/user.php";
+$userclass = new User;
 if(!isset($_SESSION['token'])){
     header("Location: /");
 }
