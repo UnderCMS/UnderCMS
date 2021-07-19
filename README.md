@@ -1,4 +1,8 @@
-<h1 align="center">UnderCMS</h3>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/UnderCMS/UnderCMS/master/undercms_logo.png" alt="Bootstrap logo" width="200" height="165">
+</p>
+
+<h3 align="center">UnderCMS</h3>
 
 <p align="center">
   A hobbyist CMS from scratch
