@@ -29,7 +29,7 @@ $articles = $article->fetchAll($db);
                                 <tr>
                                 <td scope="row"><?php echo $article['title'] ?></td>
                                 <td><?php echo $article['content'] ?></td>
-                                <td><?php if(is_null($user['pseudonym']) || $user['is_pseudonym']==0){echo $user['username'];}else{echo $user['pseudonym'];} ?></td>
+                                <td><?php if(empty($user['pseudonym']) || $user['is_pseudonym']==0){echo $user['username'];}else{echo $user['pseudonym'];} ?></td>
                                 <td><a href="/uc-admin/articles/delete/<?php echo $article['id'] ?>" name="submit" class="btn btn-outline-danger">Delete</a></td>
                                 </tr>
                         <?php } ?>
