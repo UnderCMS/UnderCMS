@@ -4,7 +4,7 @@ function RemoveSpecialChar($str) {
     // Using str_replace() function 
     // to replace the word 
     $res = str_replace( array( '\'', '"',
-    ',' , ';', '<', '>', ' ' ), '-', $str);
+    ',' , ';', '<', '>', ' ' , '!', '?'), '-', $str);
       
     // Returning the result 
     return $res;
