@@ -37,5 +37,21 @@ class User{
             ]);
         }
     }
+    public function changePassword($currentpass, $password, $id, $db){
+        $userclass = new User;
+        $user = $userclass->getUserDataByID($id, $db);
+        if(password_verify($currentpass, $user['password'])){
+            $hashpass = password_hash($password, PASSWORD_ARGON2ID);
+            $query = $db->prepare("UPDATE `".DB_PREFIX."users` SET `password`=:password WHERE `id`=:id");
+            $query->execute([
+                "password" => $hashpass,
+                "id" => $id
+            ]);
+            $result = true;
+        }else{
+            $result = false;
+        }
+        return $result;
+    }
 }
 ?>

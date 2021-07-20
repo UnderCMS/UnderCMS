@@ -1,3 +1,3 @@
 <?php
-$UC_VERSION = "0.2.5";
+$UC_VERSION = "0.2.6";
 ?>

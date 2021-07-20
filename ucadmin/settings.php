@@ -19,6 +19,19 @@ $user = $userclass->getUserDataByToken($_SESSION['token'], $db);
                             <input type="text" class="form-control" placeholder="Pseudonym" name="pseudonym" aria-describedby="basic-addon1">
                         <?php } ?>
                     </div>
+                    <p>Change password</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Current password</span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="Current password" name="currentpass" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">New password</span>
+                        </div>
+                        <input type="password" class="form-control" placeholder="New password" name="newpass" aria-describedby="basic-addon1">
+                    </div>
                     <input type="submit" name="submit" class="btn btn-outline-success" value="Save settings">
                 </form>
                 <?php
@@ -30,6 +43,23 @@ $user = $userclass->getUserDataByToken($_SESSION['token'], $db);
                             echo "<div class='alert alert-danger' role='alert'>
                         Some fields are incomplete!
                     </div>";
+                            exit;
+                        }
+                    }
+                    if(!empty($_POST['currentpass']) || !empty($_POST['newpass'])){
+                        if(!empty($_POST['currentpass']) && !empty($_POST['newpass'])){
+                            $changepass = $userclass->changePassword($_POST['currentpass'], $_POST['newpass'], $user['id'], $db);
+                            if($changepass==false){
+                                echo "<div class='alert alert-danger' role='alert'>
+                            Incorrect password!
+                        </div>";
+                                exit;
+                            }
+                        }else{
+                            echo "<div class='alert alert-danger' role='alert'>
+                        Some fields are incomplete!
+                    </div>";
+                            exit;
                         }
                     }
                     echo "<div class='alert alert-success' role='alert'>
