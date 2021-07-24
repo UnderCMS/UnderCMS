@@ -209,7 +209,7 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
             <?php }else{ ?>
                 <div class="jumbotron text-center">
                     <h3>Congratulations!</h3>
-                    <p>UnderCMS has been installed!.</p>
+                    <p>UnderCMS has been installed!</p>
                     <p>Click the button below to go to your new site!</p>
                     <a href="/" name="submit" class="btn btn-outline-success">Finish Installation</a>
                 </div>
