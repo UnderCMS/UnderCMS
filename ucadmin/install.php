@@ -15,7 +15,7 @@ if($check && $_GET['step']!=3 && !$check2){
         <div class="jumbotron text-center">
             <h3>Uh oh!</h3>
             <p>Looks like you have already installed UnderCMS...</p>
-            <a href="/" name="submit" class="btn btn-outline-success">Go to your website's home</a>
+            <a href="/" name="submit" class="btn btn-outline-success">Go to your website's homepage</a>
         </div>
     </body>
 
@@ -209,24 +209,24 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
             <?php }else{ ?>
                 <div class="jumbotron text-center">
                     <h3>Congratulations!</h3>
-                    <p>Your UnderCMS installation is done.</p>
-                    <p>Click the button below to go to your website's home!</p>
-                    <a href="/" name="submit" class="btn btn-outline-success">Finish Install</a>
+                    <p>UnderCMS has been installed!.</p>
+                    <p>Click the button below to go to your new site!</p>
+                    <a href="/" name="submit" class="btn btn-outline-success">Finish Installation</a>
                 </div>
             <?php } ?>
         <?php }else{?>
             <div class="jumbotron text-center">
                 <h3>Welcome to UnderCMS!</h3>
-                <p>This is the first time you launch UnderCMS, right?</p>
-                <p>We will help you setup your UnderCMS installation through some easy steps.</p>
-                <p>You only need:</p>
+                <p>This is the installation tool.</p>
+                <p>This installation tool will help you setup UnderCMS!</p>
+                <p>Here's the requirements:</p>
                 <ul class="list-group">
                     <li class="list-group-item">A MySQL/MariaDB installation</li>
                     <li class="list-group-item">A MySQL/MariaDB user</li>
                     <li class="list-group-item">A MySQL/MariaDB database</li>
                 </ul>
-                <p>If you're ready, let's setup your UnderCMS installation!</p>
-                <a type="button" class="btn btn-outline-success" href="/ucadmin/install.php?step=1">Let's Go!</a>
+                <p>If you have all of the above requirements ready, then let's go!</p>
+                <a type="button" class="btn btn-outline-success" href="/ucadmin/install.php?step=1">Start Installation</a>
             </div>
         <?php } ?>
     </body>
