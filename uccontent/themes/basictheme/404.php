@@ -6,8 +6,9 @@ require "inc/header.php";
         <div class="col-md-5">
             <div class="masthead-followup-icon d-inline-block mb-2">        
                 <h2 class="display-5 fw-normal">4... 0... 4...</h2>
-                <p class="lead fw-normal">The page that you want to access doesn't exist.</p>
-                <a href="/" name="submit" class="btn btn-outline-success">Go to the website's home</a>
+                <p class="lead fw-normal">The page requested doesn't exist on this server.</p>
+                <a href="/" name="submit" class="btn btn-outline-success">Back to homepage</a>
+                <a href = "javascript:history.back()">Back to previous page</a>
             </div>
         </div>
     </section>
