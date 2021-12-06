@@ -94,7 +94,7 @@ define('DB_PREFIX', '". $_POST['dbprefix'] ."');
                             fwrite($configfile, $configtext);
                             fclose($configfile);
                             require "../uc-config.php";
-                            require "../ucinclude/db/con.php";
+                            require "../ucinclude/db/dbcon.php";
                             $query = $db->prepare("CREATE TABLE `".$_POST['dbprefix']."users` (
                             `id` int NOT NULL,
                                 `username` varchar(255) COLLATE utf8_bin NOT NULL,
