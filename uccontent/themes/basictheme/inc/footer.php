@@ -1,5 +1,5 @@
 <?php
-require "./ucinclude/db/con.php";
+require "./ucinclude/db/dbcon.php";
 $query = $db->prepare("SELECT * FROM `".DB_PREFIX."options` WHERE `valuename`='site-title'");
 $query->execute();
 $result = $query->fetch();
