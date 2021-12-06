@@ -1,5 +1,5 @@
 <?php
-require "./ucinclude/db/con.php";
+require "./ucinclude/db/dbcon.php";
 session_unset();
 header("Location: /")
 ?>
