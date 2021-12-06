@@ -4,7 +4,7 @@
 //Import libraries/functions/classes
 require "ucinclude/utils/checkroot.php";
 require "ucinclude/utils/checkinstalled.php";
-require "ucinclude/db/con.php";
+require "ucinclude/db/dbcon.php";
 require "ucinclude/utils/checktheme.php";
 require "ucinclude/AltoRouter.php";
 require "uc-config.php";
