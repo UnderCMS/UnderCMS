@@ -4,7 +4,7 @@
 require "ucinclude/utils/checkroot.php";
 require "ucinclude/utils/checkinstalled.php";
 require "uc-config.php";
-require "ucinclude/db/con.php";
+require "ucinclude/db/dbcon.php";
 require "ucinclude/TokenGenerator.php";
 if(isset($_SESSION['token'])){
     header("Location: /uc-admin");
